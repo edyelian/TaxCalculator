@@ -107,6 +107,7 @@ namespace TaxCalculator.Services.Calculators.TaxJar.Models.Requests
             NexusAddresses = salesOrder?.NexusAddresses?.Select(a =>
                 new TaxJarNexusAddress()
                 {
+                    Id = a.Id,
                     Country = a.Country,
                     Zip = a.Zip,
                     State = a.State,

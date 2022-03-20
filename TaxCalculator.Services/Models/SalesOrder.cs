@@ -12,8 +12,17 @@ namespace TaxCalculator.Services.Models
         public Address? ToAddress { get; set; }
         public float? Shipping { get; set; }
         public float? Amount => Items?.Count > 0 ? Items?.Sum(i => i.UnitPrice * i.Quantity) : 0.0F;
-        public List<Item> Items { get; set; } = new List<Item>();
-        public List<Address> NexusAddresses { get; set; } = new List<Address>();
+        public List<Item>? Items { get; set; } = new List<Item>();
+        public List<NexusAddress>? NexusAddresses { get; set; } = new List<NexusAddress>();
+
+        public SalesOrder(Address? fromAddress, Address? toAddress, float? shipping, List<Item>? items, List<NexusAddress>? nexusAddresses)
+        {
+            FromAddress = fromAddress;
+            ToAddress = toAddress;
+            Shipping = shipping;
+            Items = items;
+            NexusAddresses = nexusAddresses;
+        }
     }
 
     public class Item
