@@ -20,7 +20,7 @@ namespace TaxCalculator.Services.Calculators.TaxJar
 
             var resp = await _client.GetRatesForLocationAsync(req);
 
-            return new Rate(
+            return resp is null? null : new Rate(
                     resp?.Rate?.Zip,
                     resp?.Rate?.Country,
                     string.IsNullOrEmpty(resp?.Rate?.CountryRate) ? null : float.Parse(resp?.Rate?.CountryRate),
