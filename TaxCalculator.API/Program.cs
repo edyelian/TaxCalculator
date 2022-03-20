@@ -1,6 +1,8 @@
 using System.Net.Http.Headers;
 using TaxCalculator.Services;
+using TaxCalculator.Services.Calculators;
 using TaxCalculator.Services.Calculators.TaxJar;
+using TaxCalculator.Services.Calculators.TaxJar.Interfaces;
 using TaxCalculator.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHttpClient<ICalculator, TaxJarCalculator>()
+builder.Services.AddHttpClient<ITaxJarClient, TaxJarClient>()
     .ConfigureHttpClient(httpClient =>
     {
         httpClient.BaseAddress = new Uri(builder.Configuration["TaxJar:BaseUrl"]);
@@ -20,7 +22,8 @@ builder.Services.AddHttpClient<ICalculator, TaxJarCalculator>()
     });
 
 
-builder.Services.AddScoped<TaxService>();
+builder.Services.AddScoped<TaxCalculatorService>();
+builder.Services.AddScoped<ICalculator, TaxJarCalculator>();
 
 var app = builder.Build();
 

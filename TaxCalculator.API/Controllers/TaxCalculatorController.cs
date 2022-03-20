@@ -11,9 +11,9 @@ namespace TaxCalculator.API.Controllers
     [ApiController]
     public class TaxCalculatorController : ControllerBase
     {
-        private readonly TaxService _taxService;
+        private readonly TaxCalculatorService _taxService;
 
-        public TaxCalculatorController(TaxService taxService)
+        public TaxCalculatorController(TaxCalculatorService taxService)
         {
             _taxService = taxService;
         }

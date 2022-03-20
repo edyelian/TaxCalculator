@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using TaxCalculator.Services.Calculators.TaxJar;
+using TaxCalculator.Services.Calculators.TaxJar.Models.Requests;
 using TaxCalculator.Services.Models;
 using Xunit;
 
@@ -36,12 +37,12 @@ namespace TaxCalculator.Tests
                 BaseAddress = new Uri("https://api.mocktaxjar.com/v2/")
             };
 
-            var taxJarCalculator = new TaxJarCalculator(client);
-            var address = new Address(null, "55378", null, null, null);
-            var rate = await taxJarCalculator.GetRatesForLocationAsync(address);
+            var taxJarClient = new TaxJarClient(client);
+            var req = new TaxJarRateRequest(null, "55378", null, null, null);
+            var resp = await taxJarClient.GetRatesForLocationAsync(req);
 
-            Assert.NotNull(rate);
-            Assert.Equal(0.07375F, rate?.CombinedRate);
+            Assert.NotNull(resp);
+            Assert.Equal("0.07375", resp?.Rate?.CombinedRate);
 
         }
     }
