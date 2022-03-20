@@ -48,5 +48,16 @@ namespace TaxCalculator.API.Controllers
 
             return Ok(resp ?? new GetRatesForLocationResponse());
         }
+
+        [HttpPost("GetSalesTaxForOrder")]
+        [ProducesResponseType(typeof(float?), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult<GetRatesForLocationResponse>> GetSalesTaxForOrder([FromBody] SalesOrder request)
+        {
+            if (request == null || string.IsNullOrEmpty(request?.ToAddress?.Country) || request?.Shipping is null)
+                return BadRequest();
+
+            return Ok(await _taxService.GetSalesTaxForOrderAsync(request));
+        }
     }
 }

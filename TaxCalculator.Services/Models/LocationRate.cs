@@ -1,7 +1,7 @@
 ﻿
 namespace TaxCalculator.Services.Models
 {
-    public class Rate
+    public class LocationRate
     {
         public string? Zip { get; set; }
         public string? Country { get; set; }
@@ -22,11 +22,11 @@ namespace TaxCalculator.Services.Models
         public float? ParkingRate { get; set; }
         public float? DistanceSalesThreshold { get; set; }
 
-        public Rate(string? zip, string? country, float? countryRate,
-            string? state, float? stateRate, string? county, float? countyRate,
-            string? city, float? cityRate, float? combinedDistrictRate, float? combinedRate, 
-            bool? freightTaxable, string? name, float? standardRate, float? reducedRate, float? superReduceRate,
-            float? parkingRate, float? distanceSalesThreshold)
+        public LocationRate(string? zip, string? country = null, float? countryRate = null,
+            string? state = null, float? stateRate = null, string? county = null, float? countyRate = null,
+            string? city = null, float? cityRate = null, float? combinedDistrictRate = null, float? combinedRate = null, 
+            bool? freightTaxable = null, string? name = null, float? standardRate = null, float? reducedRate = null, float? superReduceRate = null,
+            float? parkingRate = null, float? distanceSalesThreshold = null)
         {
             Zip = zip;
             Country = country;

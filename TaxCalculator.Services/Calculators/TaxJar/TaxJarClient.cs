@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TaxCalculator.Services.Calculators.TaxJar.Interfaces;
@@ -37,16 +38,34 @@ namespace TaxCalculator.Services.Calculators.TaxJar
             var request = new HttpRequestMessage(HttpMethod.Get, $"rates/{req.Zip}{queryString}");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            using (var response = await _client.SendAsync(request))
+            using var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            TaxJarRateRootResponse? resp = JsonSerializer.Deserialize<TaxJarRateRootResponse>(content);
+
+            return resp;
+        }
+
+        public async Task<TaxJarSalesTaxForOrderResponse?> GetSalesTaxForOrderAsync(TaxJarOrderRequest req)
+        {
+            if (req == null || string.IsNullOrEmpty(req?.ToCountry) || req?.Shipping is null)
+                return null; // can be handled in a different way. e.g.: throw custom exception error.
+
+            var request = new HttpRequestMessage(HttpMethod.Post, $"taxes")
             {
-                response.EnsureSuccessStatusCode();
+                Content = new StringContent(req.ToJson(), Encoding.UTF8, "application/json")
+            };
 
-                var content = await response.Content.ReadAsStringAsync();
+            using var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
 
-                TaxJarRateRootResponse? resp = JsonSerializer.Deserialize<TaxJarRateRootResponse>(content);
+            var content = await response.Content.ReadAsStringAsync();
 
-                return resp;
-            }
+            TaxJarSalesTaxForOrderResponse? resp = JsonSerializer.Deserialize<TaxJarSalesTaxForOrderResponse>(content);
+
+            return resp;
         }
 
     }

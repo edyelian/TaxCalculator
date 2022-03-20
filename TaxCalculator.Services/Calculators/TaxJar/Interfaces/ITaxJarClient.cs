@@ -7,5 +7,6 @@ namespace TaxCalculator.Services.Calculators.TaxJar.Interfaces
     public interface ITaxJarClient
     {
         Task<TaxJarRateRootResponse?> GetRatesForLocationAsync(TaxJarRateRequest req);
+        Task<TaxJarSalesTaxForOrderResponse?> GetSalesTaxForOrderAsync(TaxJarOrderRequest req);
     }
 }

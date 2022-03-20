@@ -13,9 +13,14 @@ namespace TaxCalculator.Services
             _calculator = calculator;
         }
 
-        public async Task<Rate?> GetRatesForLocationAsync(Address address)
+        public async Task<LocationRate?> GetRatesForLocationAsync(Address address)
         {
             return await _calculator.GetRatesForLocationAsync(address);
+        }
+
+        public async Task<float?> GetSalesTaxForOrderAsync(SalesOrder salesOrder)
+        {
+            return await _calculator.GetSalesTaxForOrderAsync(salesOrder);
         }
     }
 }

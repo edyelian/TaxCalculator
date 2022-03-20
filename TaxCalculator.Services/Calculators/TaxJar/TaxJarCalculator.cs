@@ -14,13 +14,13 @@ namespace TaxCalculator.Services.Calculators.TaxJar
         {
             _client = client;
         }
-        public async Task<Rate?> GetRatesForLocationAsync(Address address)
+        public async Task<LocationRate?> GetRatesForLocationAsync(Address address)
         {
             var req = new TaxJarRateRequest(address.Country, address.Zip, address.State,address.City, address.Street);
 
             var resp = await _client.GetRatesForLocationAsync(req);
 
-            return resp is null? null : new Rate(
+            return resp is null? null : new LocationRate(
                     resp?.Rate?.Zip,
                     resp?.Rate?.Country,
                     string.IsNullOrEmpty(resp?.Rate?.CountryRate) ? null : float.Parse(resp?.Rate?.CountryRate),
@@ -40,6 +40,15 @@ namespace TaxCalculator.Services.Calculators.TaxJar
                     string.IsNullOrEmpty(resp?.Rate?.ParkingRate) ? null : float.Parse(resp?.Rate?.ParkingRate),
                     string.IsNullOrEmpty(resp?.Rate?.DistanceSaleThreshold) ? null : float.Parse(resp?.Rate?.DistanceSaleThreshold)
                     );
+        }
+
+        public async Task<float?> GetSalesTaxForOrderAsync(SalesOrder salesOrder)
+        {
+            var req = new TaxJarOrderRequest(salesOrder);
+
+            var resp = await _client.GetSalesTaxForOrderAsync(req);
+
+            return resp?.Tax?.AmountToCollect;
         }
     }
 }

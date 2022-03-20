@@ -18,10 +18,9 @@ namespace TaxCalculator.Tests
         {
             Mock<ICalculator> mockCalculator = new();
             var address = new Address(null, "55378", null, null, null);
-            Rate? rate = new(zip: "55378", country: "US", countryRate: 0.0F, state: "MN", stateRate: 0.06875F, county: "SCOTT", countyRate: 0.005F, 
-                            city: "PRIOR LAKE", cityRate: 0.0F, combinedDistrictRate: 0.0F, combinedRate: 0.07375F, freightTaxable: true, 
-                            name: null, standardRate: null, reducedRate: null, superReduceRate: null, parkingRate: null, distanceSalesThreshold: null);
-            mockCalculator.Setup(c => c.GetRatesForLocationAsync(address)).Returns(Task.FromResult<Rate?>(rate));
+            LocationRate? rate = new(zip: "55378", country: "US", countryRate: 0.0F, state: "MN", stateRate: 0.06875F, county: "SCOTT", countyRate: 0.005F, 
+                            city: "PRIOR LAKE", cityRate: 0.0F, combinedDistrictRate: 0.0F, combinedRate: 0.07375F, freightTaxable: true);
+            mockCalculator.Setup(c => c.GetRatesForLocationAsync(address)).Returns(Task.FromResult<LocationRate?>(rate));
 
             var taxCalculatorService = new TaxCalculatorService(mockCalculator.Object);
 

@@ -5,6 +5,7 @@ namespace TaxCalculator.Services.Interfaces
 {
     public interface ICalculator
     {
-        Task<Rate?> GetRatesForLocationAsync(Address address);
+        Task<LocationRate?> GetRatesForLocationAsync(Address address);
+        Task<float?> GetSalesTaxForOrderAsync(SalesOrder salesOrder);
     }
 }
