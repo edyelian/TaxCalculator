@@ -7,11 +7,11 @@ using TaxCalculator.Services.Models;
 
 namespace TaxCalculator.Services
 {
-    public class TaxService
+    public class TaxCalculatorService
     {
         private readonly ICalculator _calculator;
 
-        public TaxService(ICalculator calculator)
+        public TaxCalculatorService(ICalculator calculator)
         {
             _calculator = calculator;
         }
