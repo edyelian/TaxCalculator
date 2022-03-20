@@ -1,6 +1,5 @@
 using System.Net.Http.Headers;
 using TaxCalculator.Services;
-using TaxCalculator.Services.Calculators;
 using TaxCalculator.Services.Calculators.TaxJar;
 using TaxCalculator.Services.Calculators.TaxJar.Interfaces;
 using TaxCalculator.Services.Interfaces;

@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using TaxCalculator.Services.Calculators.TaxJar;
 using TaxCalculator.Services.Calculators.TaxJar.Models.Requests;
-using TaxCalculator.Services.Models;
 using Xunit;
 
 namespace TaxCalculator.Tests

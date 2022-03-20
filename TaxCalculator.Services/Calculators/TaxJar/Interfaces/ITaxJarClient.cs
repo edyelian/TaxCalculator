@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TaxCalculator.Services.Models;
+﻿using System.Threading.Tasks;
 using TaxCalculator.Services.Calculators.TaxJar.Models.Responses;
 using TaxCalculator.Services.Calculators.TaxJar.Models.Requests;
 

@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TaxCalculator.Services.Calculators.TaxJar.Interfaces;
 using TaxCalculator.Services.Calculators.TaxJar.Models.Requests;
 using TaxCalculator.Services.Calculators.TaxJar.Models.Responses;
-using TaxCalculator.Services.Interfaces;
-using TaxCalculator.Services.Models;
 
 namespace TaxCalculator.Services.Calculators.TaxJar
 {

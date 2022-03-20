@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using TaxCalculator.Services.Calculators.TaxJar.Interfaces;
 using TaxCalculator.Services.Calculators.TaxJar.Models.Requests;
 using TaxCalculator.Services.Interfaces;
 using TaxCalculator.Services.Models;
 
-namespace TaxCalculator.Services.Calculators
+namespace TaxCalculator.Services.Calculators.TaxJar
 {
     public class TaxJarCalculator : ICalculator
     {
